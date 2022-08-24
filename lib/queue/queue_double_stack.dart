@@ -16,6 +16,10 @@ class QueueStack<E> implements QueueDataStructure<E> {
   /// constant-time
   final _leftStack = <E>[];
 
+  /// return length property
+  /// O(1) cause you used list for stacks
+  int get length => _leftStack.length + _rightStack.length;
+
   @override
   E? dequeue() {
     if (_leftStack.isEmpty) {
@@ -28,7 +32,6 @@ class QueueStack<E> implements QueueDataStructure<E> {
       _rightStack.clear();
     }
     if (_leftStack.isEmpty) return null;
-    print(_rightStack);
 
     /// remove last element from left stack
     return _leftStack.removeLast();
