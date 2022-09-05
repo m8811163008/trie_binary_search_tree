@@ -56,7 +56,7 @@ class BinaryNode<T> {
     /// you call action before recursively traversing the children
     /// always visits the current node first
     action(value);
-    leftChild?.traversePreOrder(action);
+    leftChild?.traversePreOrder(action); //conditional nullable access
     rightChild?.traversePreOrder(action);
   }
 
@@ -102,33 +102,19 @@ class BinaryNode<T> {
           getHeight2(node.rightChild),
         );
   }
+
+  bool isBinary() {
+    return false;
+  }
 }
 
 void main() {
   final tree = createBinaryTree();
-  print(tree);
   final list = serialize(tree);
-  final newTree = deserializeHelper(list);
-  print(newTree);
-}
-
-int sum(int a, int b) {
-  if (b == 0) return a;
-  if (b > 0) return 1 + sum(a, b - 1);
-  return 0;
-}
-
-int power(int value, int pow) {
-  if (pow == 1 || pow == 0) return value;
-
-  /// how could we use the base case to solve the problem for
-  /// bigger input sizes
-  return value * power(value, pow - 1);
-}
-
-int factorial(int value) {
-  if (value == 0 || value == 1) return 1;
-  return factorial(value - 1) * value;
+  final treeAfterReverse = deserializeHelper(list);
+  final treeBeforeReverse = _deserialize(list);
+  print('treeAfterReverse : \n $treeAfterReverse');
+  print(treeBeforeReverse);
 }
 
 BinaryNode<int> createBinaryTree() {
@@ -185,9 +171,10 @@ BinaryNode<T>? _deserialize<T>(List<T?> list) {
   /// Since you're calling removeAt(0) as many times as elements
   /// in the list, this algorithm has an O(n2) time complexity
   /// O(n)
-  // final value = list.removeAt(0);
+  final value = list.removeAt(0);
+
   /// O(1)
-  final value = list.removeLast();
+  // final value = list.removeLast();
   if (value == null) return null;
 
   /// You reassemble the tree by creating a node from the current

@@ -270,6 +270,7 @@ extension ReversibleLinkedList<E> on LinkedList<E> {
     var previous = head;
     var current = head?.nextNode;
     while (current != null) {
+      List test;
       // The if bloc will trigger if it's necessary to remove
       // a node
       if (current.value == value) {
