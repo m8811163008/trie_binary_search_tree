@@ -92,7 +92,7 @@ class AvlTree<E extends Comparable<dynamic>> {
         /// This means that you want to use either left or
         /// right-left rotation/
         final left = node.leftChild;
-        if (left != null && left!.balanceFactor == -1) {
+        if (left != null && left.balanceFactor == -1) {
           return leftRightRotate(node);
         } else {
           return rightRotate(node);
